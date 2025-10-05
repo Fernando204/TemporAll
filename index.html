@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Exibir Imagem da API</title>
+</head>
+<body>
+    <h1>Imagem da API</h1>
+    <p>Longitude: </p>
+    <input type="text" class="lon">
+    <p>Latitude: </p>
+    <input type="text" class="lat">
+
+    <p>Area em Km³</p>
+    <input type="text" class="area">
+
+    <p>data (YYYY-MM-dd):</p>
+    <input type="Text" name="" id="date">
+
+    <select name="" id="labels">
+        <option value="true_color">cor</option>
+        <option value="temperatura_superficie">temperatura</option>
+        <option value="temperatura_ar">temperatura do ar</option>
+    </select>
+
+    <button onclick="loadImage()">carregar imagem</button>
+    <img id="imagem-api" width="300px" src="" alt="A imagem aparecerá aqui" />
+
+    <script>
+        const loadImage = ()=>{
+            const lat = document.querySelector(".lat").value
+            const lon = document.querySelector(".lon").value
+            const delta = document.querySelector(".area").value
+            const layer = document.getElementById("labels").value
+            const date = document.getElementById("date").value
+            
+            document.getElementById('imagem-api').src = ""
+            document.getElementById('imagem-api').alt = "Carregando..."
+            document.getElementById('imagem-api').src = 'http://localhost:8080/image?longitude='+lon+'&latitude='+lat+'&layer='+layer+'&data='+date+'&delta='+delta;
+        }
+        // Opcional: se precisar definir dinamicamente a URL
+    </script>
+</body>
+</html>   

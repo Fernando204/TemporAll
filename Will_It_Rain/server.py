@@ -47,8 +47,12 @@ async def get_image(longitude: str = "-47.45", latitude: str = "-23.51", layer: 
             data = datetime.now().strftime("%Y-%m-%d")
             
         # Usar a função getImage com o parâmetro de camada e zoom aumentado
-        imagem.getImage(lat_float, lon_float, layer_type=layer, delta=delta, date=data)
-        return {"status": "success", "message": f"Imagem gerada com sucesso usando camada: {layer}, zoom: {delta}"}
+        filename = imagem.getImage(lat_float, lon_float, layer_type=layer, delta=delta, date=data)
+
+        with open(filename,"rb") as f:
+            conteudo = f.read()
+
+        return Response(content=conteudo, media_type="image/png")
     except Exception as e:
         return {"status": "error", "message": str(e)}
 

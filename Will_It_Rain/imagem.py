@@ -26,7 +26,7 @@ AVAILABLE_LAYERS = {
     "umidade_relativa": "AIRS_L3_RelativeHumidity_500hPa_Day"
 }
 
-def getImage(lat, lon, layer_type="true_color", delta=5.0, date=None):
+def getImage(lat, lon, layer_type="true_color", delta=100.0, date=None):
     """
     Obtém uma imagem do serviço WMS da NASA com base nas coordenadas e tipo de camada.
     
@@ -51,7 +51,7 @@ def getImage(lat, lon, layer_type="true_color", delta=5.0, date=None):
     layer = AVAILABLE_LAYERS[layer_type]
     
     wms = WebMapService(
-        'https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi?',
+        ' https://gibs.earthdata.nasa.gov/wms/epsg3857/best/wms.cgi',
         version='1.1.1'
     )
     
@@ -65,7 +65,7 @@ def getImage(lat, lon, layer_type="true_color", delta=5.0, date=None):
         layers=[layer],  # Camada selecionada
         srs='epsg:4326',               # Sistema de referência
         bbox=bbox,                      # Extensão
-        size=(1200, 600),              # Tamanho da imagem
+        size=(4800, 4800),              # Tamanho da imagem
         time=date,                      # Data do dado
         format='image/png',            # Formato da imagem
         transparent=True               # Transparência
